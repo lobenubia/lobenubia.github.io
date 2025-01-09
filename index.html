@@ -52,6 +52,26 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .big-button {
+            display: block;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .big-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -63,6 +83,10 @@
     <div class="container">
 
         <!-- Información de la comunidad -->
+        <div class="card">
+            <a href="mailto:comunidades@gasque.es?cc=edificionubia@hotmail.com&subject=Incidencia%20edificio%20Nubia" class="big-button">Comunicar una nueva incidencia</a>
+        </div>
+        
         <div class="card">
             <h2>Administrador de fincas</h2>
             <p>GASQUE</p>
