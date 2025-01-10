@@ -76,10 +76,6 @@
         #bus-info {
           margin-top: 20px;
           padding: 10px;
-          background: #fff;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .bus-destination {
           margin-bottom: 10px;
@@ -288,8 +284,8 @@
             div.className = 'bus-destination';
             div.innerHTML = `
               <p><strong>Línea ${destino.linea} - ${destino.destino}</strong></p>
-              <p><strong>Primer autobús:</strong> ${destino.primero}</p>
-              <p><strong>Segundo autobús:</strong> ${destino.segundo}</p>
+              <p><strong>Primer bus:</strong> ${destino.primero}</p>
+              <p><strong>Segundo bus:</strong> ${destino.segundo}</p>
             `;
             busInfoContainer.appendChild(div);
           });
@@ -322,9 +318,10 @@
           // Display the bus info in the HTML
           const busInfoDiv = document.getElementById('bus21Info');
           busInfoDiv.innerHTML = `
+              <h3>(1297) Cosuenda / Paseo Longares Línea: 21</h3>
               <p><strong>Línea 21 - OLIVER - MIRALBUENO</strong></p>
-              <p><strong>Primer autobús:</strong> ${firstBus}</p>
-              <p><strong>Segundo autobús:</strong> ${secondBus}</p>
+              <p><strong>Primer bus:</strong> ${firstBus}</p>
+              <p><strong>Segundo bus:</strong> ${secondBus}</p>
           `;
         })
         .catch(error => {
