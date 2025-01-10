@@ -110,7 +110,8 @@
         </div>
 
         <div class="card">
-            <h2>Próximos Autobuses</h1>
+            <h2>Próximos Autobuses</h2>
+              <div id="bus21Info"></div>
               <div id="bus-info">Cargando información...</div>
         </div>
         
@@ -301,6 +302,43 @@
 
     // Cargar información al cargar la página
     window.onload = fetchBusInfo;
+  </script>
+    
+  <script>
+    // Function to fetch bus info from the custom API (bus line 21)
+    function getBus21Info() {
+      // Define the API endpoint
+      const apiUrl = 'https://43xluyac1m.execute-api.eu-west-1.amazonaws.com/prod/tiempos';
+      
+      // Make a GET request to the API
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Parse the response
+          const busLine = data.Line;
+          const firstBus = data['Primer bus'];
+          const secondBus = data['Segundo bus'];
+
+          // Display the bus info in the HTML
+          const busInfoDiv = document.getElementById('bus21Info');
+          busInfoDiv.innerHTML = `
+            <h2>Línea ${busLine} </h2>
+            <p>Primer bus: ${firstBus}</p>
+            <p>Segundo bus: ${secondBus}</p>
+          `;
+        })
+        .catch(error => {
+          console.error('Error fetching bus info:', error);
+          const busInfoDiv = document.getElementById('bus21Info');
+          busInfoDiv.innerHTML = `
+            <h2>Bus Line 21 Information</h2>
+            <p>Error loading bus data.</p>
+          `;
+        });
+    }
+
+    // Call the function to get the bus information
+    getBus21Info();
   </script>
 
 </body>
