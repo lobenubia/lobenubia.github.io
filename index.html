@@ -81,16 +81,13 @@
           border-radius: 5px;
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
         .bus-destination {
           margin-bottom: 10px;
         }
-        
         .bus-destination h3 {
           margin: 0;
           font-size: 1.2em;
         }
-        
         .bus-destination p {
           margin: 5px 0;
           font-size: 0.9em;
@@ -281,7 +278,7 @@
           const destinos = posteData.destinos;
 
           // Título del poste
-          const title = document.createElement('h2');
+          const title = document.createElement('h3');
           title.textContent = posteData.title;
           busInfoContainer.appendChild(title);
 
@@ -290,7 +287,7 @@
             const div = document.createElement('div');
             div.className = 'bus-destination';
             div.innerHTML = `
-              <h3>Línea ${destino.linea} - ${destino.destino}</h3>
+              <p><strong>Línea ${destino.linea} - ${destino.destino}</strong></p>
               <p><strong>Primer autobús:</strong> ${destino.primero}</p>
               <p><strong>Segundo autobús:</strong> ${destino.segundo}</p>
             `;
