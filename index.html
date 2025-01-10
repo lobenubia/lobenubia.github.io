@@ -72,6 +72,30 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
+        
+        #bus-info {
+          margin-top: 20px;
+          padding: 10px;
+          background: #fff;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bus-destination {
+          margin-bottom: 10px;
+        }
+        
+        .bus-destination h3 {
+          margin: 0;
+          font-size: 1.2em;
+        }
+        
+        .bus-destination p {
+          margin: 5px 0;
+          font-size: 0.9em;
+        }
+        
     </style>
 </head>
 <body>
@@ -223,7 +247,65 @@
             <a href="https://wa.me/617342252" target="_blank">Escríbeme</a>
         </div>
 
+        <div class="card">
+            <h2>Próximos Autobuses</h1>
+              <div id="bus-info">Cargando información...</div>
+        </div>
+        
+    
     </div>
+
+    <script>
+    async function fetchBusInfo() {
+      const urls = [
+        'https://www.zaragoza.es/sede/servicio/urbanismo-infraestructuras/transporte-urbano/poste-autobus/tuzsa-581?rf=html&srsname=utm30n',
+        'https://www.zaragoza.es/sede/servicio/urbanismo-infraestructuras/transporte-urbano/poste-autobus/tuzsa-3013?rf=html&srsname=utm30n'
+      ];
+      const busInfoContainer = document.getElementById('bus-info');
+
+      try {
+        // Realizar ambas peticiones
+        const responses = await Promise.all(urls.map(url => fetch(url, { headers: { 'accept': 'application/json' } })));
+        const data = await Promise.all(responses.map(response => {
+          if (!response.ok) {
+            throw new Error('Error al obtener los datos');
+          }
+          return response.json();
+        }));
+
+        // Limpiar contenido
+        busInfoContainer.innerHTML = '';
+
+        // Mostrar información de cada poste
+        data.forEach(posteData => {
+          const destinos = posteData.destinos;
+
+          // Título del poste
+          const title = document.createElement('h2');
+          title.textContent = posteData.title;
+          busInfoContainer.appendChild(title);
+
+          // Mostrar información de cada destino
+          destinos.forEach(destino => {
+            const div = document.createElement('div');
+            div.className = 'bus-destination';
+            div.innerHTML = `
+              <h3>Línea ${destino.linea} - ${destino.destino}</h3>
+              <p><strong>Primer autobús:</strong> ${destino.primero}</p>
+              <p><strong>Segundo autobús:</strong> ${destino.segundo}</p>
+            `;
+            busInfoContainer.appendChild(div);
+          });
+        });
+      } catch (error) {
+        busInfoContainer.innerHTML = '<p>Error al cargar la información del autobús.</p>';
+        console.error(error);
+      }
+    }
+
+    // Cargar información al cargar la página
+    window.onload = fetchBusInfo;
+  </script>
 
 </body>
 </html>
